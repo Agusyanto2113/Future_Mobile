@@ -2,7 +2,7 @@
 
 <div class="main-content">
     <div class="wrapper">
-        <h1>Add Category</h1>
+        <h1>Add Product</h1>
 
         <br><br>
         <?php
@@ -72,7 +72,7 @@
                   {
                   //We do not have categories 
                   ?>
-                    <option value="0">No Category Found</option>
+                    <option value="0">No Product Found</option>
                   <?php
                  }
                 //2.Display on Dropdown
@@ -120,7 +120,7 @@
 
             <tr>
                 <td colspan="2">
-                    <input type="submit" name="submit" value="Add Category" class="btn-secondary">
+                    <input type="submit" name="submit" value="Add Product" class="btn-secondary">
                 </td>
             </tr>
         </table>
