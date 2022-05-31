@@ -1,0 +1,196 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.wrapper {
+    padding: 1%;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.clearfix {
+    float: none;
+    clear: both;
+}
+
+.tbl-full {
+    width: 100%;
+}
+
+.tbl-30 {
+    width:500px;
+}
+
+.tbl-100{
+  width: 100%;
+}
+
+table tr th {
+    border-bottom: 10px solid black;
+    padding-bottom: 10px;
+    text-align: left;
+
+}
+
+table tr td {
+    padding: 1%;
+}
+
+.admintable{
+  width: 250px;
+  height: 35px;
+  border-radius: 15px;
+}
+
+.btn-primary {
+    background-color: #1e90ff;
+    padding: 1%;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 20px;
+}
+
+.btn-primary:hover {
+    background-color: #3742fa;
+}
+
+.btn-secondary {
+    width: 200px;
+    background-color: #7bed9f;
+    padding: 1%;
+    padding-left: 5px;
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 20px;
+}
+
+.btn-secondary:hover {
+    background-color: #2ed573;
+}
+
+.btn-danger {
+    background-color: #ff6b81;
+    padding: 1%;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 20px;
+}
+
+.btn-danger:hover {
+    background-color: #ff4757;
+}
+
+.success {
+    color: #2ed573;
+}
+
+.error {
+    color: #ff4757;
+}
+
+
+/*Css For Menu*/
+
+.menu {
+    border-bottom: 1px solid gray;
+}
+
+.menu ul {
+    list-style-type: none;
+}
+
+.menu ul li {
+    display: inline;
+    padding: 1%;
+}
+
+.menu ul li a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #f9ca20;
+}
+
+.menu ul li a:hover {
+    color: #f0ff47;
+}
+
+.img-admin{
+  border-radius: 20px;
+}
+
+.desc-admin{
+  border-radius: 10px;
+  padding: 5px;
+}
+
+/*Css Main Content*/
+
+.main-content {
+    padding: 3% 0;
+    background-color: #f1f2f6;
+}
+
+.col-4 {
+    width: 18%;
+    background-color: white;
+    margin: 1%;
+    padding: 2%;
+    float: left;
+}
+
+
+/*Css For Footer*/
+
+.footer {
+    background-color: #ffe047;
+    color: white;
+}
+
+
+/* Css For Login */
+.main-container{
+  background-image: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url(../assets/bg.png);
+}
+
+.login {
+    color: white;
+    border: 2px solid bisque;
+    width: 30%;
+    margin: 10% auto;
+    padding: 2%;
+    box-sizing: border-box;
+    border-radius: 20px;
+}
+.input{
+  border-radius: 10PX;
+  height: 30px;
+  width: 90%;
+  text-align: center;
+  font-size: 16px;
+}
+.btn-input{
+  height: 30px;
+  padding: 2% 2%;
+  width: 30%;
+  border-radius: 20px;
+  background-color: silver;
+}
+
+.btn-input:hover{
+  background-color: #9ebfe5;
+  box-shadow: 0 0 2em 0.5em lightblue;
+}
+
+a{
+  text-decoration: none;
+  color: #fff;
+}
