@@ -49,13 +49,13 @@
                         <div class="qty d-flex pt-2">
                             
                             <div class="d-flex font-rale w-25">
-                            <form action="" method="POST" class="qtyflex">
+                            
                                 <button type="submit" name="submitqty" class="qty-up border bg-light" data-id="<?php echo $item['item_id'] ?? '0'; ?>"><i class="fas fa-angle-up"></i></button>
                                 
                                     <input  type="text" name="qtydata" data-id="<?php echo $item['item_id'] ?? '0'; ?>" class="qty_input border px-3 w-100 bg-light" readonly value="1" placeholder="1" class="transparant">
                                     
                                 <button type="submit" name="submitqty" data-id="<?php echo $item['item_id'] ?? '0'; ?>" class="qty-down border bg-light"><i class="fas fa-angle-down"></i></button>
-                            </form>                   
+                            
                             </div>
                             
                             <form method="post">
