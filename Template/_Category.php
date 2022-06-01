@@ -20,7 +20,7 @@
                     $title = $row['name'];
                     $images = $row['images'];
                     ?>
-                        <a href="<?php echo SITEURL; ?>Default-category.php?category_id=<?php echo $id; ?>">
+                        
                             <div class="box-3 float-container data-container">
                             <?php
                                 //check whether the image is available or not
