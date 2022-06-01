@@ -3,7 +3,7 @@
 if($_SERVER['REQUEST_METHOD'] == "POST"){
   if (isset($_POST['top_sale_submit_product'])){
       // call method addToCart
-      $Cart->addToCart($_POST['user_id'], $_POST['item_id'], $_POST['quantity']);
+      $Cart->addToCart($_POST['user_id'], $_POST['item_id'], $_POST['qty_order'], $_POST['price']);
   }
 }
 
@@ -22,6 +22,10 @@ foreach($product->getData()as $item):
                           <div class="col">
                             <form method="post">
                                 <input type="hidden" name="item_id" value="<?php echo $item['item_id'] ?? '1'; ?>">
+                                <input type="hidden" name="user_id" value="<?php echo $iduser; ?>">
+                                <input type="hidden" name="qty_order" value="<?php echo 1; ?>">
+                                <input type="hidden" name="price" value="<?php echo $item['item_price'] ?? '0'; ?>">
+                                
                                 <input type="hidden" name="user_id" onclick="location.href='cart.php'" value="<?php echo 1; ?>">
                                 <?php
                                 if (in_array($item['item_id'], $Cart->getCartId($product->getData('cart')) ?? [])){
@@ -130,9 +134,19 @@ foreach($product->getData()as $item):
                                     <h6 class="font-baloo">Qty</h6>
                                     <div class="px-4 d-flex font-rale">
                                     </div>
-                                    <button class="plus border bg-light" data-id="pro1"><i class=" fas fa-angle-up "></i></button>
+
+                                    <form method="POST">
+                                    <button name="qtycount" class="plus border bg-light" data-id="pro1"><i class=" fas fa-angle-up " ></i></button>
                                     <span type="text " data-id="pro1" class="num px-2 w-50 bg-light text-center" readonly name="quantity" placeholder="1">1</span>
-                                    <button class="minus border bg-light" data-id="pro1"><i class=" fas fa-angle-down "></i></button>
+                                    <button name="qtycount" class="minus border bg-light" data-id="pro1"><i class=" fas fa-angle-down "></i></button>
+                                    <?php
+                                    if($_SERVER['REQUEST_METHOD'] == "POST"){
+                                        if (isset($_POST['qtycount'])){
+                                          $qtytotal = $_POST['qtydata'];
+                                        }
+                                    }
+                                    ?> 
+                                    </form>
 
                                     <script>
                                     const plus =document.querySelector(".plus"),
