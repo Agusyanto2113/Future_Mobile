@@ -59,7 +59,7 @@
         $password = mysqli_real_escape_string($conn,$raw_password);
 
         //2. Query the check whether the user with username and password exists or not 
-        $sql = "SELECT * FROM tbl_admin WHERE username='$username' AND password='$password'";
+        $sql = "SELECT * FROM tbl_admin WHERE username='$username' AND password='$password' AND role='$username'";
 
         //3. Execute the Query
         $res = mysqli_query($conn, $sql);

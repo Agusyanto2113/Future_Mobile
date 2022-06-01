@@ -27,6 +27,7 @@ if(isset($_POST['submit']))
     gmail = '$email',
     DOB = '$date',
     password = '$password',
+    role = '$username',
     status = 'active'
    ";
 
