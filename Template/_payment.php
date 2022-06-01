@@ -26,7 +26,7 @@ if(isset($_GET['id']) && isset($_GET['item_id']) && isset($_GET['sub_total']) &&
   $subTotal = $_GET['sub_total'];
   $quantitytotal = $_GET['quantityorder'];
 
-  $totalneedpay = $subTotal * $quantitytotal;
+  //$totalneedpay = $subTotal * $quantitytotal;
 
   $sqlpro = "SELECT a.item_name,a.item_price,a.item_brand,b.qtyorder,c.full_name,c.gmail,c.CustomerAddress,c.Phone_Num,c.CustomerCity,c.CustomerState,c.Zip_Code,c.full_name_ship,c.Zip_Code_Ship,c.CustomerAddressShipping,c.CustomerStateShipping,c.CustomerCityShipping FROM product a LEFT JOIN cart b ON a.item_id =b.item_id LEFT JOIN tbl_admin C ON b.user_id =c.id WHERE b.user_id = $id";
 
@@ -147,7 +147,7 @@ if(isset($_GET['id']) && isset($_GET['item_id']) && isset($_GET['sub_total']) &&
                 </div>
                 <div class="inputBox">
                     <span>Total Pay :</span>
-                    <input type="number" name="subtotal" value="<?php echo $totalneedpay; ?>">
+                    <input type="number" name="subtotal" value="<?php echo $subTotal; ?>">
                 </div>
             </div>
             </div>
@@ -290,7 +290,7 @@ if(isset($_GET['id']) && isset($_GET['item_id']) && isset($_GET['sub_total']) &&
                 // Query Executed and Category Added
                 $_SESSION['Pay'] = "<div class='success text-center' >PayMent Successfully.</div>";
                 //Redirect to manage category page
-                $deletedrecord = $Cart->deleteCart($_POST['item_id']);
+                $deletedrecord = $Cart->deleteCart($iduser);
                 header('location:'.SITEURL.'cart.php');
                 
             }else

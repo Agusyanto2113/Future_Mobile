@@ -49,14 +49,13 @@
                         <div class="qty d-flex pt-2">
                             
                             <div class="d-flex font-rale w-25">
-                            
-                                <button class="qty-up border bg-light" data-id="<?php echo $item['item_id'] ?? '0'; ?>"><i class="fas fa-angle-up"></i></button>
-                                <form action="" method="POST" class="qtyflex">
-                                    <input type="submit" value="" class="transparant">  
+                            <form action="" method="POST" class="qtyflex">
+                                <button type="submit" name="submitqty" class="qty-up border bg-light" data-id="<?php echo $item['item_id'] ?? '0'; ?>"><i class="fas fa-angle-up"></i></button>
+                                
                                     <input  type="text" name="qtydata" data-id="<?php echo $item['item_id'] ?? '0'; ?>" class="qty_input border px-3 w-100 bg-light" readonly value="1" placeholder="1" class="transparant">
-                                    <input type="submit" value="" name="submitqty" class="transparant">
-                                </form>                   
-                                <button data-id="<?php echo $item['item_id'] ?? '0'; ?>" class="qty-down border bg-light"><i class="fas fa-angle-down"></i></button>
+                                    
+                                <button type="submit" name="submitqty" data-id="<?php echo $item['item_id'] ?? '0'; ?>" class="qty-down border bg-light"><i class="fas fa-angle-down"></i></button>
+                            </form>                   
                             </div>
                             
                             <form method="post">
@@ -96,14 +95,14 @@
                     <div class="border-top py-4">
                         <h5 class="font-baloo font-size-20">Subtotal ( <?php echo isset($subTotal) ? count($subTotal) : 0; ?> item):&nbsp; <span class="text-danger">$<span class="text-danger" id="deal-price" name="totprice"><?php echo isset($subTotal) ? $Cart->getSum($subTotal) : 0; ?></span> </span> </h5>
                         <?php
-                                  if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-                                    if (isset($_POST['submitqty'])){
-                                      $qtytotal = $_POST['qtydata'];
+                        //          if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+                        //            if (isset($_POST['submitqty'])){
+                        //              $qtytotal = $_POST['qtydata'];
 
-                                    }} 
+                        //            }} 
                         ?>
                         <input type="hidden" name="qtytotalorder" value="<?php echo $qtytotal; ?>">
-                        <button type="submit" onclick="location.href='<?php echo SITEURL; ?>checkout.php?id=<?php echo $iduser;?>&item_id=<?php echo $item['item_id'];?>&sub_total=<?php echo isset($subTotal) ? $Cart->getSum($subTotal) : 0; ?>&quantityorder=<?php echo $qtytotal;?>'" class="btn btn-warning mt-3">Proceed to Buy</button>
+                        <button type="submit" onclick="location.href='<?php echo SITEURL; ?>checkout.php?id=<?php echo $iduser;?>&item_id=<?php echo $item['item_id'];?>&sub_total=<?php echo isset($subTotal) ? $Cart->getSum($subTotal) : 0; ?>&quantityorder=<?php echo isset($subTotal) ? count($subTotal) : 0; ?>'" class="btn btn-warning mt-3">Proceed to Buy</button>
                     </div>
                 </div>
             </div>
