@@ -5,7 +5,7 @@
     <div class="range">
       <?php            
         //Create SQL Query to display categories from data base 
-        $sql = "SELECT * FROM category WHERE active='Yes' AND featured='Yes' LIMIT 3 ";
+        $sql = "SELECT * FROM category WHERE active='Yes' AND featured='Yes'";
             //Execute the query 
             $res = mysqli_query($conn,$sql);
             //Count row to check whether the category is available or not 
