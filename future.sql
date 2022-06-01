@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 31 Bulan Mei 2022 pada 08.15
+-- Waktu pembuatan: 01 Jun 2022 pada 03.11
 -- Versi server: 10.4.19-MariaDB
 -- Versi PHP: 8.0.6
 
@@ -175,18 +175,21 @@ CREATE TABLE `tbl_admin` (
   `Zip_Code_Ship` varchar(50) DEFAULT NULL,
   `CustomerAddressShipping` varchar(250) DEFAULT NULL,
   `CustomerCityShipping` varchar(250) DEFAULT NULL,
-  `CustomerStateShipping` varchar(250) DEFAULT NULL
+  `CustomerStateShipping` varchar(250) DEFAULT NULL,
+  `role` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `tbl_admin`
 --
 
-INSERT INTO `tbl_admin` (`id`, `full_name`, `username`, `password`, `gmail`, `DOB`, `status`, `CustomerAddress`, `CustomerCity`, `CustomerState`, `Zip_Code`, `Name_On_Card`, `CreditCardNumber`, `Card_Exp_Month`, `Card_Exp_Year`, `CVV`, `full_name_ship`, `Phone_Num`, `Zip_Code_Ship`, `CustomerAddressShipping`, `CustomerCityShipping`, `CustomerStateShipping`) VALUES
-(20, 'AGUS YANTO', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'agusyanto2113@gmail.com', '2022-05-03', 'active', 'L. TG UBAN KM 25, RT/RW 004/001, Kel/Desa TOAPAYA ASRI, Kecamatan TOAPAYA', 'Kota/Kabupaten', 'Kepulauan Riau', '29151', NULL, NULL, NULL, NULL, NULL, 'AGUS YANTO', '082172040214', '29151', 'Jl. TG UBAN KM 25, RT/RW 004/001, Kel/Desa TOAPAYA ASRI, Kecamatan TOAPAYA', 'Kota/Kabupaten', 'Kepulauan Riau'),
-(21, 'AGUS YANTO', 'Paskaris', '9555e0591eaf7478ef1ec0c2f4ab9ab8', 'agusyanto2113@gmail.com', '0000-00-00', '', 'JL. TG UBAN KM 25', 'Kab Bintan', 'Kepulauan Riau', '29151', NULL, NULL, NULL, NULL, NULL, 'AGUS YANTO', '082172040214', '29151', 'JL. TG UBAN KM 25', 'Bintan', 'Indonesia'),
-(22, 'AGUS YANTO', 'jerry', '30035607ee5bb378c71ab434a6d05410', 'agusyanto2113@gmail.com', '0000-00-00', '', 'L. TG UBAN KM 25, RT/RW 004/001, Kel/Desa TOAPAYA ASRI, Kecamatan TOAPAYA', 'Kota/Kabupaten', 'Kepulauan Riau', '29151', NULL, NULL, NULL, NULL, NULL, 'AGUS YANTO', '082172040214', '29151', 'JL. TG UBAN KM 25', 'Kab Bintan', 'Kepulauan Riau'),
-(24, 'Beauty salon', 'salon12', '202cb962ac59075b964b07152d234b70', 'agusyanto2113@gmail.com', '2022-05-30', 'active', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `tbl_admin` (`id`, `full_name`, `username`, `password`, `gmail`, `DOB`, `status`, `CustomerAddress`, `CustomerCity`, `CustomerState`, `Zip_Code`, `Name_On_Card`, `CreditCardNumber`, `Card_Exp_Month`, `Card_Exp_Year`, `CVV`, `full_name_ship`, `Phone_Num`, `Zip_Code_Ship`, `CustomerAddressShipping`, `CustomerCityShipping`, `CustomerStateShipping`, `role`) VALUES
+(20, 'AGUS YANTO', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'agusyanto2113@gmail.com', '2022-05-03', 'active', 'L. TG UBAN KM 25, RT/RW 004/001, Kel/Desa TOAPAYA ASRI, Kecamatan TOAPAYA', 'Kota/Kabupaten', 'Kepulauan Riau', '29151', NULL, NULL, NULL, NULL, NULL, 'AGUS YANTO', '082172040214', '29151', 'Jl. TG UBAN KM 25, RT/RW 004/001, Kel/Desa TOAPAYA ASRI, Kecamatan TOAPAYA', 'Kota/Kabupaten', 'Kepulauan Riau', 'admin'),
+(21, 'AGUS YANTO', 'Paskaris', '9555e0591eaf7478ef1ec0c2f4ab9ab8', 'agusyanto2113@gmail.com', '0000-00-00', '', 'JL. TG UBAN KM 25', 'Kab Bintan', 'Kepulauan Riau', '29151', NULL, NULL, NULL, NULL, NULL, 'AGUS YANTO', '082172040214', '29151', 'JL. TG UBAN KM 25', 'Bintan', 'Indonesia', NULL),
+(22, 'AGUS YANTO', 'jerry', '30035607ee5bb378c71ab434a6d05410', 'agusyanto2113@gmail.com', '0000-00-00', '', 'L. TG UBAN KM 25, RT/RW 004/001, Kel/Desa TOAPAYA ASRI, Kecamatan TOAPAYA', 'Kota/Kabupaten', 'Kepulauan Riau', '29151', NULL, NULL, NULL, NULL, NULL, 'AGUS YANTO', '082172040214', '29151', 'JL. TG UBAN KM 25', 'Kab Bintan', 'Kepulauan Riau', NULL),
+(24, 'Beauty salon', 'salon12', '202cb962ac59075b964b07152d234b70', 'agusyanto2113@gmail.com', '2022-05-30', 'active', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(25, 'agusyanto', 'invisible', '4c4999ac17adcef1a5a75fab71e5c857', 'invisible@gmail.com', '2022-06-01', 'active', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'admin'),
+(26, 'sayu', 'sayu', '671b73f699c20aed9a5d7130f0040b4a', 'sayu', '0000-00-00', 'active', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'sayu');
 
 -- --------------------------------------------------------
 
@@ -353,7 +356,7 @@ ALTER TABLE `ram_data`
 -- AUTO_INCREMENT untuk tabel `tbl_admin`
 --
 ALTER TABLE `tbl_admin`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_brand`
