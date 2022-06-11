@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 01 Jun 2022 pada 03.11
+-- Waktu pembuatan: 11 Jun 2022 pada 09.16
 -- Versi server: 10.4.19-MariaDB
 -- Versi PHP: 8.0.6
 
@@ -33,8 +33,17 @@ CREATE TABLE `cart` (
   `item_id` int(11) NOT NULL,
   `qtyorder` varchar(50) DEFAULT NULL,
   `price` varchar(50) DEFAULT NULL,
-  `product_name` varchar(250) DEFAULT NULL
+  `product_name` varchar(250) DEFAULT NULL,
+  `item_image` varchar(200) DEFAULT NULL,
+  `totprice` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `cart`
+--
+
+INSERT INTO `cart` (`cart_id`, `user_id`, `item_id`, `qtyorder`, `price`, `product_name`, `item_image`, `totprice`) VALUES
+(161, 1, 30, '1', '250.00', 'Vivo17Y', 'Product_img_524.jpg', NULL);
 
 -- --------------------------------------------------------
 
@@ -75,23 +84,11 @@ CREATE TABLE `orderinfo` (
   `item_id` int(11) NOT NULL,
   `qtyorder` varchar(50) DEFAULT NULL,
   `price` varchar(50) DEFAULT NULL,
-  `product_name` varchar(250) DEFAULT NULL
+  `product_name` varchar(250) DEFAULT NULL,
+  `item_image` varchar(200) DEFAULT NULL,
+  `totprice` varchar(200) DEFAULT NULL,
+  `status` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `orderinfo`
---
-
-INSERT INTO `orderinfo` (`cart_id`, `user_id`, `item_id`, `qtyorder`, `price`, `product_name`) VALUES
-(84, 20, 30, '2', '250.00', 'Vivo17Y'),
-(85, 20, 31, '1', '300.00', 'Xiaomi T11'),
-(86, 20, 30, '1', '250.00', 'Vivo17Y'),
-(87, 20, 31, '1', '300.00', 'Xiaomi T11'),
-(88, 20, 31, '1', '300.00', 'Xiaomi T11'),
-(89, 20, 30, '1', '250.00', 'Vivo17Y'),
-(90, 20, 30, '<br />\r\n<b>Warning</b>:  Undefined variable $qtyor', '<br />\r\n<b>Warning</b>:  Undefined variable $itemp', '<br />\r\n<b>Warning</b>:  Undefined variable $itemname in <b>D:AWEBXAMPPhtdocsFUTUREMOBILETemplate\\_payment.php</b> on line <b>185</b><br />\r\n'),
-(91, 20, 31, '<br />\r\n<b>Warning</b>:  Undefined variable $qtyor', '<br />\r\n<b>Warning</b>:  Undefined variable $itemp', '<br />\r\n<b>Warning</b>:  Undefined variable $itemname in <b>D:AWEBXAMPPhtdocsFUTUREMOBILETemplate\\_payment.php</b> on line <b>185</b><br />\r\n'),
-(92, 20, 31, '1', '300.00', 'Xiaomi T11');
 
 -- --------------------------------------------------------
 
@@ -240,17 +237,6 @@ CREATE TABLE `tb_order` (
   `cvv` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data untuk tabel `tb_order`
---
-
-INSERT INTO `tb_order` (`id`, `product`, `price`, `qty`, `total`, `orderdate`, `status`, `customer_name`, `customer_contact`, `customer_email`, `customer_address`, `user_id`, `item_id`, `zip_code`, `cardname`, `card_number`, `expmonth`, `expyear`, `cvv`) VALUES
-(6, 'Vivo17Y', '250', 2, '500', '2022-05-29', 'Ordered', 'AGUS YANTO', '082172040214', 'agusyanto2113@gmail.com', 'Jl. TG UBAN KM 25, RT/RW 004/001, Kel/Desa TOAPAYA ASRI, Kecamatan TOAPAYA', '20', '30', NULL, NULL, NULL, NULL, NULL, NULL),
-(14, 'Xiaomi T11', '300', 1, '300', '2022-05-30', '', 'AGUS YANTO', '082172040214', 'agusyanto2113@gmail.com', 'Jl. TG UBAN KM 25, RT/RW 004/001, Kel/Desa TOAPAYA ASRI, Kecamatan TOAPAYA', '20', '31', '29151', 'agus', '1234567', '08', '2022', '232'),
-(15, 'Xiaomi T11', '300', 1, '300', '2022-05-30', 'On Delivery', 'AGUS YANTO', '082172040214', 'agusyanto2113@gmail.com', 'Jl. TG UBAN KM 25, RT/RW 004/001, Kel/Desa TOAPAYA ASRI, Kecamatan TOAPAYA', '20', '31', '29151', '', '', '', '', ''),
-(16, 'Vivo17Y', '250', 1, '250', '2022-05-30', 'Delivered', 'AGUS YANTO', '082172040214', 'agusyanto2113@gmail.com', 'Jl. TG UBAN KM 25, RT/RW 004/001, Kel/Desa TOAPAYA ASRI, Kecamatan TOAPAYA', '20', '30', '29151', 'agus', '1234', '235', '2022', '202'),
-(19, 'Xiaomi T11', '300', 1, '300', '2022-05-30', 'Delivered', 'AGUS YANTO', '082172040214', 'agusyanto2113@gmail.com', 'Jl. TG UBAN KM 25, RT/RW 004/001, Kel/Desa TOAPAYA ASRI, Kecamatan TOAPAYA', '20', '31', '29151', 'agus', '122412434524544555', '8', '2024', '123');
-
 -- --------------------------------------------------------
 
 --
@@ -261,9 +247,11 @@ CREATE TABLE `wishlist` (
   `cart_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
+  `qtyorder` varchar(200) DEFAULT NULL,
   `price` varchar(200) DEFAULT NULL,
   `product_name` varchar(200) DEFAULT NULL,
-  `qtyorder` varchar(200) DEFAULT NULL
+  `item_image` varchar(200) DEFAULT NULL,
+  `totprice` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -326,7 +314,7 @@ ALTER TABLE `tb_order`
 -- AUTO_INCREMENT untuk tabel `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=162;
 
 --
 -- AUTO_INCREMENT untuk tabel `category`
@@ -338,7 +326,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT untuk tabel `orderinfo`
 --
 ALTER TABLE `orderinfo`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=157;
 
 --
 -- AUTO_INCREMENT untuk tabel `product`
@@ -368,7 +356,7 @@ ALTER TABLE `tb_brand`
 -- AUTO_INCREMENT untuk tabel `tb_order`
 --
 ALTER TABLE `tb_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
