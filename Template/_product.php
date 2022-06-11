@@ -26,10 +26,10 @@ foreach($product->getData()as $item):
                                 <input type="hidden" name="qty_order" value="<?php echo 1; ?>">
                                 <input type="hidden" name="price" value="<?php echo $item['item_price'] ?? '0'; ?>">
                                 
-                                <input type="hidden" name="productname" value="<?php echo $item['item_name'] ?? '0'; ?>">
-                                <input type="hidden" name="image" value="<?php echo $item['item_image'] ?? '0'; ?>">
+                              <input type="hidden" name="productname" value="<?php echo $item['item_name'] ?? '0'; ?>">
+                              <input type="hidden" name="image" value="<?php echo $item['item_image'] ?? '0'; ?>">
                                 
-                                <input type="hidden" name="user_id" onclick="location.href='cart.php'" value="<?php echo 1; ?>">
+                                
                                 <?php
                                 if (in_array($item['item_id'], $Cart->getCartId($product->getData('cart')) ?? [])){
                                     echo '
@@ -137,10 +137,24 @@ foreach($product->getData()as $item):
                                     <h6 class="font-baloo">Qty</h6>
                                     <div class="px-4 d-flex font-rale">
                                     </div>
-                                    
+
+                                    <form method="POST">
                                     <button name="qtycount" class="plus border bg-light" data-id="pro1"><i class=" fas fa-angle-up " ></i></button>
                                     <span type="text " data-id="pro1" class="num px-2 w-50 bg-light text-center" readonly name="quantity" placeholder="1">1</span>
                                     <button name="qtycount" class="minus border bg-light" data-id="pro1"><i class=" fas fa-angle-down "></i></button>
+                                    <?php
+                                    if($_SERVER['REQUEST_METHOD'] == "POST"){
+                                        if (isset($_POST['qtycount'])){
+                                          $qtytotal = $_POST['qtydata'];
+                                        }else{
+
+                                        }$qtytotal = 1;
+                                    }else{
+                                      $qtytotal = 1;
+                                    }
+                                    ?> 
+                                    </form>
+
                                     <script>
                                     const plus =document.querySelector(".plus"),
                                     minus =document.querySelector(".minus"),

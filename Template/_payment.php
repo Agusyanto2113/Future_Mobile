@@ -221,23 +221,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
             $inserttoorderinfo = "INSERT INTO orderinfo (cart_id,user_id,item_id,qtyorder,price,product_name,item_image,totprice) SELECT cart_id,user_id,item_id,qtyorder,price,product_name,item_image,totprice  FROM cart";
 
-          $resuporder2 = mysqli_query($conn, $inserttoorderinfo);
+            $resuporder2 = mysqli_query($conn, $inserttoorderinfo);
+            
+            $Delete = "DELETE FROM cart WHERE user_id=$iduser";
+            $resuporder3 = mysqli_query($conn, $Delete);
 
           }
           }
           }else{
              //Failed to UPDATE
-             $_SESSION['Pay'] = "<div class='error text-center'>Failed to Make Payment Please Check Your Data .</div>";
+             $_SESSION['Pay'] = "<div class='error text-center'>Failed to Make Payment Please Check Your Data1 .</div>";
              //Redirect to manage category page
              header('location:'.SITEURL.'checkout.php');
           }
 
-          if($resuporder2 == true)
+          if($resuporder3 == true)
             {
                 // Query Executed and Category Added
                 $_SESSION['Pay'] = "<div class='success text-center' >PayMent Successfully.</div>";
                 //Redirect to manage category page
-                $deletedrecord = $Cart->deleteCart($iduser);
                 header('location:'.SITEURL.'cart.php');    
             }else
             {
