@@ -35,6 +35,8 @@
                     $customer_contact = $row['customer_contact'];
                     $customer_email = $row['customer_email'];
                     $customer_address = $row['customer_address'];
+                    $item_id = $row['item_id'];
+                    $user_id = $row['user_id'];
 
                 }else
                 {
@@ -105,6 +107,8 @@
                 <td colspan="2">
                     <input type="hidden" name="id" value="<?php echo $id; ?>">
                     <input type="hidden" name="price" value="<?php echo $price; ?>">
+                    <input type="hidden" name="item_id" value="<?php echo $item_id; ?>">
+                    <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
                     <input type="submit" name="submit" value="Update Order" class="btn-secondary">
                 </td>
             </tr>
@@ -129,6 +133,9 @@
                 $customer_email = $_POST['customer_email'];
                 $customer_address = $_POST['customer_address'];
 
+                $item_id = $_POST['item_id'];
+                $user_id = $_POST['user_id'];
+
                 //update the values
                 $sql2 = "UPDATE tb_order SET 
                     qty = $qty,
@@ -144,9 +151,14 @@
                 //Execute the Query
                 $res2 = mysqli_query($conn,$sql2);
 
+                if($res2 ==TRUE){
+                  $sql3 = "UPDATE orderinfo SET status = '$status' WHERE item_id =$item_id AND user_id = $user_id";
+                  $res3 = mysqli_query($conn,$sql3);
+                }
+
                 //Check whether update or not
                 //and redirect to manage order with message
-                if($res2== true)
+                if($res3== true)
                 {
                     //Updated
                     $_SESSION['update'] = "<div class='success'>Order Update successfully!</div>";
