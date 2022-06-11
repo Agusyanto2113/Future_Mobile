@@ -1,6 +1,6 @@
 <?php
 session_start();
-define('SITEURL', 'http://localhost:8081/FUTUREMOBILE/');
+define('SITEURL', 'http://localhost:8081/Future_Mobile-main/');
 define('LOCALHOST', 'localhost');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
