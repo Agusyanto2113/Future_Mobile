@@ -36,7 +36,9 @@
     <?php
     // require functions.php file
     if (!isset($_SESSION['username'])) {
-  }
+    }
+    if (!isset($_SESSION['payment'])) {
+    }
     require ('functions.php');
 
     ?>
