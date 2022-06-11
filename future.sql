@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 11 Jun 2022 pada 09.37
+-- Waktu pembuatan: 11 Jun 2022 pada 10.05
 -- Versi server: 10.4.19-MariaDB
 -- Versi PHP: 8.0.6
 
@@ -37,13 +37,6 @@ CREATE TABLE `cart` (
   `item_image` varchar(200) DEFAULT NULL,
   `totprice` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `cart`
---
-
-INSERT INTO `cart` (`cart_id`, `user_id`, `item_id`, `qtyorder`, `price`, `product_name`, `item_image`, `totprice`) VALUES
-(161, 1, 30, '1', '250.00', 'Vivo17Y', 'Product_img_524.jpg', NULL);
 
 -- --------------------------------------------------------
 
@@ -89,15 +82,6 @@ CREATE TABLE `orderinfo` (
   `totprice` varchar(200) DEFAULT NULL,
   `status` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `orderinfo`
---
-
-INSERT INTO `orderinfo` (`cart_id`, `user_id`, `item_id`, `qtyorder`, `price`, `product_name`, `item_image`, `totprice`, `status`) VALUES
-(157, 0, 0, '<br />\r\n<b>Warning</b>:  Undefined variable $qtyor', '<br />\r\n<b>Warning</b>:  Undefined variable $itemp', '<br />\r\n<b>Warning</b>:  Undefined variable $itemname in <b>D:AWEBXAMPPhtdocsFUTUREMOBILETemplate\\_payment.php</b> on line <b>182</b><br />\r\n', NULL, NULL, NULL),
-(161, 1, 30, '1', '250.00', 'Vivo17Y', 'Product_img_524.jpg', NULL, NULL),
-(161, 1, 30, '1', '250.00', 'Vivo17Y', 'Product_img_524.jpg', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -246,16 +230,6 @@ CREATE TABLE `tb_order` (
   `cvv` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data untuk tabel `tb_order`
---
-
-INSERT INTO `tb_order` (`id`, `product`, `price`, `qty`, `total`, `orderdate`, `status`, `customer_name`, `customer_contact`, `customer_email`, `customer_address`, `user_id`, `item_id`, `zip_code`, `cardname`, `card_number`, `expmonth`, `expyear`, `cvv`) VALUES
-(57, '<br />\r\n<b>Warning</b>:  Undefined variable $itemname in <b>D:AWEBXAMPPhtdocsFUTUREMOBILETemplate\\_payment.php</b> on line <b>182</b><br />\r\n', '0', 0, '0', '2022-06-11', '', '<br />\r\n<b>Warning</b>:  Undefined variable $fullnameship in <b>D:AWEBXAMPPhtdocsFUTUREMOBILETemplate\\_payment.php</b> on line <b>187</b><br />\r\n', '<br />\r\n<b>Warning</b>:  Undefined variable $phonenum in <b>D:AWEBXAMPPhtdocsFUTUREMOBILETemplate\\_payment.php</b> on line <b>189</b><br />\r\n', 'agusyanto2113@gmail.com', '<br />\r\n<b>Warning</b>:  Undefined variable $customeraddressshipping in <b>D:AWEBXAMPPhtdocsFUTUREMOBILETemplate\\_payment.php</b> on line <b>188</b><br />\r\n', '<br />\r\n<b>Warning</b>:  Undefined variable $id in <b>D:AWEBXAMPPhtdocsFUTUREMOBILETemplate\\_payment.php</b> on line <b>180</b><br />\r\n', '<br />\r\n<b>Warning</b>:  Undefined variable $item_id in <b>D:AWEBXAMPPhtdocsFUTUREMOBILETemplate\\_payment.php</b> on line <b>181</b><br />\r\n', '29151', 'agus', '3425635', '6427', '2022', '132'),
-(58, 'Vivo17Y', '250', 1, '0', '0000-00-00', '', '', '', '', '', '1', '30', NULL, NULL, NULL, NULL, NULL, NULL),
-(59, 'Vivo17Y', '250', 1, '0', '0000-00-00', '', '', '', '', '', '1', '30', NULL, NULL, NULL, NULL, NULL, NULL),
-(60, 'Vivo17Y', '250', 1, '0', '0000-00-00', '', '', '', '', '', '1', '30', NULL, NULL, NULL, NULL, NULL, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -327,7 +301,7 @@ ALTER TABLE `tb_order`
 -- AUTO_INCREMENT untuk tabel `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=162;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=168;
 
 --
 -- AUTO_INCREMENT untuk tabel `category`
@@ -363,7 +337,7 @@ ALTER TABLE `tb_brand`
 -- AUTO_INCREMENT untuk tabel `tb_order`
 --
 ALTER TABLE `tb_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
