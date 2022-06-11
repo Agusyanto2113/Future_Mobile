@@ -11,6 +11,30 @@ class Cart
         $this->db = $db;
     }
 
+    
+
+    Public function insertIntoCartNew($userid, $itemid, $qtyorder, $price, $productname,$image, $table='cart'){
+      if($itemid != null){
+        $result = $this->db->con->query("INSERT INTO {$table} (user_id,item_id,qtyorder,price,product_name,item_image)  VALUES ('$userid','$itemid','$qtyorder','$price','$productname','$image')");
+        if($result){
+          header("Location:" . $_SERVER['PHP_SELF']);
+        }
+        return $result;
+      }
+    }
+
+    Public function updateQty($qty, $itemid, $userid,$itemprice,$table='cart'){
+      $totprice = $qty * $itemprice;
+      if($qty != null){
+        $result = $this->db->con->query("UPDATE {$table} SET qtyorder={$qty},totprice={$totprice} WHERE item_id ={$itemid} AND user_id={$userid}");
+        if($result){
+          header("Location:" . $_SERVER['PHP_SELF']);
+        }
+        return $result;
+      }
+
+    }
+
     // insert into cart table
     public  function insertIntoCart($params = null, $table = "cart"){
         if ($this->db->con != null){
@@ -32,13 +56,14 @@ class Cart
     }
 
     // to get user_id and item_id and insert into cart table
-    public  function addToCart($userid, $itemid, $qtyorder, $price){
-        if (isset($userid) && isset($itemid) && isset($qtyorder) && isset($price) ){
+    public  function addToCart($userid, $itemid, $qtyorder, $price,){
+        if (isset($userid) && isset($itemid) && isset($qtyorder) && isset($price)){
             $params = array(
                 "user_id" => $userid,
                 "item_id" => $itemid,
                 "qtyorder" => $qtyorder,
                 "price" => $price,
+
             );
 
             // insert data into cart
@@ -61,6 +86,8 @@ class Cart
         }
     }
 
+
+
     public function deleteCartItem($item_id = null, $table = 'cart'){
       if($item_id != null){
           $result = $this->db->con->query("DELETE FROM {$table} WHERE item_id={$item_id}");
@@ -69,7 +96,17 @@ class Cart
           }
           return $result;
       }
-  }
+    }
+
+    public function deleteWishItem($item_id = null, $table = 'wishlist'){
+      if($item_id != null){
+          $result = $this->db->con->query("DELETE FROM {$table} WHERE item_id={$item_id}");
+          if($result){
+              header("Location:" . $_SERVER['PHP_SELF']);
+          }
+          return $result;
+      }
+    }
 
     // calculate sub total
     public function getSum($arr){
@@ -123,5 +160,63 @@ class Cart
       }
   }
 
+    public function getData($table = 'cart'){
+      $result = $this->db->con->query("SELECT * FROM {$table}");
+
+      $resultArray = array();
+
+      // fetch product data one by one
+      while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+          $resultArray[] = $item;
+      }
+
+      return $resultArray;
+  }
+
+  // get product using item id
+  public function getProduct($item_id = null, $table= 'cart'){
+      if (isset($item_id)){
+          $result = $this->db->con->query("SELECT * FROM {$table} WHERE item_id={$item_id}");
+
+          $resultArray = array();
+
+          // fetch product data one by one
+          while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+              $resultArray[] = $item;
+          }
+
+          return $resultArray;
+      }
+  }
+
+
+  public function getDataOrder($table = 'orderinfo'){
+    $result = $this->db->con->query("SELECT * FROM {$table}");
+
+    $resultArray = array();
+
+    // fetch product data one by one
+    while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+        $resultArray[] = $item;
+    }
+
+    return $resultArray;
+    }
+
+    // get product using item id
+    public function getProductOrder($item_id = null, $table= 'orderinfo'){
+        if (isset($item_id)){
+            $result = $this->db->con->query("SELECT * FROM {$table} WHERE item_id={$item_id}");
+
+            $resultArray = array();
+
+            // fetch product data one by one
+            while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                $resultArray[] = $item;
+            }
+
+            return $resultArray;
+        }
+    }
 
 }
