@@ -9,6 +9,13 @@
         if (isset($_POST['wishlist-submit'])){
             $Cart->saveForLater($_POST['item_id']);
         }
+
+        if (isset($_POST['smbtbtn'])){
+          $Cart->updateQty($_POST['qtydata'],$_POST['item_id'],$_POST['user_id'],$_POST['item_price']);
+          if($Cart == TRUE){
+            header("location:".SITEURL.'checkout.php');
+          }
+      }
     }
 ?>
 
@@ -20,8 +27,8 @@
         <div class="row">
             <div class="col-sm-9">
                 <?php
-                    foreach ($product->getData('cart') as $item) :
-                        $cart = $product->getProduct($item['item_id']);
+                    foreach ($Cart->getData('cart') as $item) :
+                        $cart = $Cart->getProduct($item['item_id']);
                         $subTotal[] = array_map(function ($item){
                 ?>
                 <!-- cart item -->
@@ -30,8 +37,8 @@
                         <img src="assets/product/<?php echo $item['item_image'];?>" style="height: 120px;" alt="cart1" class="img-fluid">
                     </div>
                     <div class="col-sm-8">
-                        <h5 class="font-baloo font-size-20"><?php echo $item['item_name'] ?? "Unknown"; ?></h5>
-                        <small>by <?php echo $item['item_brand'] ?? "Brand"; ?></small>
+                        <h5 class="font-baloo font-size-20"><?php echo $item['product_name'] ?? "Unknown"; ?></h5>
+                        <!--<small>by <?php echo $item['item_brand'] ?? "Brand"; ?></small>-->
                         <!-- product rating -->
                         <div class="d-flex">
                             <div class="rating text-warning font-size-12">
@@ -51,8 +58,9 @@
                             <div class="d-flex font-rale w-25">
                             
                                 <button type="submit" name="submitqty" class="qty-up border bg-light" data-id="<?php echo $item['item_id'] ?? '0'; ?>"><i class="fas fa-angle-up"></i></button>
-                                
-                                    <input  type="text" name="qtydata" data-id="<?php echo $item['item_id'] ?? '0'; ?>" class="qty_input border px-3 w-100 bg-light" readonly value="1" placeholder="1" class="transparant">
+                                    
+                                    <input  type="text" name="qtydata" data-id="<?php echo $item['item_id'] ?? '0'; ?>" class="qty_input border px-3 w-100 bg-light" readonly value="<?php echo $item['qtyorder']?>" placeholder="1" class="transparant">
+                                    
                                     
                                 <button type="submit" name="submitqty" data-id="<?php echo $item['item_id'] ?? '0'; ?>" class="qty-down border bg-light"><i class="fas fa-angle-down"></i></button>
                             
@@ -68,7 +76,32 @@
                                 <button type="submit" name="wishlist-submit" class="btn font-baloo text-danger">Save for Later</button>
                             </form>
 
+                            <div>
+                              
+                            </div>
 
+                            <!--<script type="text/javascript">
+                              var x = document.getElementById("text1").value;
+                                var defaultVal = x.defaultValue;
+                              function fn1() {
+                              //  var str = document.getElementById("text1").value;
+                              //  document.writeIn(str);
+                                var x = document.getElementById("text1");
+                                var defaultVal = x.defaultValue;
+                                var currentVal = x.value;
+
+                                if(defaultVal==currentVal){
+                                  document.getElementById("demo").innerHTML = x.defaultValue;
+                                }else{
+                                  document.getElementById("demo").innerHTML = currentVal;
+                                }
+
+                              }
+                            </script>
+                            -->
+
+                            
+                          
                         </div>
                         <!-- !product qty -->
 
@@ -76,13 +109,13 @@
 
                     <div class="col-sm-2 text-right">
                         <div class="font-size-20 text-danger font-baloo">
-                            $<span class="product_price" data-id="<?php echo $item['item_id'] ?? '0'; ?>"><?php echo $item['item_price'] ?? 0; ?></span>
+                            $<span class="product_price" data-id="<?php echo $item['item_id'] ?? '0'; ?>"><?php echo $item['price'] ?? 1; ?></span>
                         </div>
                     </div>
                 </div>
                 <!-- !cart item -->
                 <?php
-                            return $item['item_price'];
+                            return $item['price'];
                         }, $cart); // closing array_map function
                     endforeach;
                 ?>
@@ -94,15 +127,27 @@
                     
                     <div class="border-top py-4">
                         <h5 class="font-baloo font-size-20">Subtotal ( <?php echo isset($subTotal) ? count($subTotal) : 0; ?> item):&nbsp; <span class="text-danger">$<span class="text-danger" id="deal-price" name="totprice"><?php echo isset($subTotal) ? $Cart->getSum($subTotal) : 0; ?></span> </span> </h5>
+                        
+                        <form method="POST">
+                        <!--<p name="demo" id="demo"></p>-->
+                        <input type="hidden" name="item_id" value="<?php echo $item['item_id'];?>">
+                        <input type="hidden" name="user_id" value="<?php echo $iduser; ?>">
+                        <input type="hidden" name="item_price" value="<?php echo $item['price']; ?>">
+                        <input id="text1" type="hidden" name="qtydata" data-id="<?php echo $item['item_id'] ?? '0'; ?>" class="qty_input border px-3 w-100 bg-light" value="1" readonly  placeholder="1" class="transparant">
+                        
+                        <button type="submit" name="smbtbtn"  class="btn btn-warning mt-3">Proceed to Buy</button>
+                        <a href='<?php echo SITEURL; ?>checkout.php?id=<?php echo $iduser;?>&item_id=<?php echo $item['item_id'];?>&sub_total=<?php echo isset($subTotal) ? $Cart->getSum($subTotal) : 0; ?>&quantityorder=<?php echo isset($subTotal) ? count($subTotal) : 0; ?>'>
+                        </a>
                         <?php
-                        //          if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-                        //            if (isset($_POST['submitqty'])){
-                        //              $qtytotal = $_POST['qtydata'];
-
-                        //            }} 
+                        //if(isset($_POST['submit'])){
+                        //  $qty=$_POST['demo'];
+                        //  echo $qty;
+                        //}
+                        //echo $is;
                         ?>
-                        <input type="hidden" name="qtytotalorder" value="<?php echo $qtytotal; ?>">
-                        <button type="submit" onclick="location.href='<?php echo SITEURL; ?>checkout.php?id=<?php echo $iduser;?>&item_id=<?php echo $item['item_id'];?>&sub_total=<?php echo isset($subTotal) ? $Cart->getSum($subTotal) : 0; ?>&quantityorder=<?php echo isset($subTotal) ? count($subTotal) : 0; ?>'" class="btn btn-warning mt-3">Proceed to Buy</button>
+                        </form>
+
+                       
                     </div>
                 </div>
             </div>

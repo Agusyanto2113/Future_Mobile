@@ -9,6 +9,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
   if (isset($_POST['orderinfosubmit'])){
     //$deletedrecord = $Cart->deleteCart($_POST['item_id']);
+
+    
   }
 }
 ?>
@@ -16,19 +18,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 <?php
 
-
-
-
-if(isset($_GET['id']) && isset($_GET['item_id']) && isset($_GET['sub_total']) && isset($_GET['quantityorder'])){
-
-  $id = $_GET['id'];
-  $item_id = $_GET['item_id'];
-  $subTotal = $_GET['sub_total'];
-  $quantitytotal = $_GET['quantityorder'];
-
   //$totalneedpay = $subTotal * $quantitytotal;
 
-  $sqlpro = "SELECT a.item_name,a.item_price,a.item_brand,b.qtyorder,c.full_name,c.gmail,c.CustomerAddress,c.Phone_Num,c.CustomerCity,c.CustomerState,c.Zip_Code,c.full_name_ship,c.Zip_Code_Ship,c.CustomerAddressShipping,c.CustomerStateShipping,c.CustomerCityShipping FROM product a LEFT JOIN cart b ON a.item_id =b.item_id LEFT JOIN tbl_admin C ON b.user_id =c.id WHERE b.user_id = $id";
+  $sqlpro = "SELECT a.item_name,a.item_price,a.item_brand,b.qtyorder,c.full_name,c.gmail,c.CustomerAddress,c.Phone_Num,c.CustomerCity,c.CustomerState,c.Zip_Code,c.full_name_ship,c.Zip_Code_Ship,c.CustomerAddressShipping,c.CustomerStateShipping,c.CustomerCityShipping FROM product a LEFT JOIN cart b ON a.item_id =b.item_id LEFT JOIN tbl_admin C ON b.user_id =c.id WHERE b.user_id = $iduser";
 
   $res = mysqli_query($conn, $sqlpro);
 
@@ -61,10 +53,8 @@ if(isset($_GET['id']) && isset($_GET['item_id']) && isset($_GET['sub_total']) &&
   $customerstateshipping = $row['CustomerStateShipping'];
 
   }
-}
+
 ?>
-
-
     <form action="" method="POST">
       <?php if(isset($_SESSION['Pay']))
             {
@@ -105,15 +95,8 @@ if(isset($_GET['id']) && isset($_GET['item_id']) && isset($_GET['sub_total']) &&
 
             
             <div class="col">
-            <label for="myCheck">Manual Payment:</label> 
-            <input type="checkbox" id="myCheck" onclick="myFunction()">
-
-            <label for="myCheck">Select Payment:</label> 
-            <input type="checkbox" id="myCheck1" onclick="myFunction()">
-
-          
-            
-
+            <!--<label for="myCheck">Manual Payment:</label> 
+            <button type="submit" id="myCheck" onclick="myFunction()"></button>-->
             </br>
             <div id="text" class="col">
                 <h3 class="title">Payment</h3>
@@ -155,7 +138,7 @@ if(isset($_GET['id']) && isset($_GET['item_id']) && isset($_GET['sub_total']) &&
 
             <p id="text" style="display:none">Checkbox is CHECKED!</p>-->
          
-            <script
+            <!--<script
             src="https://code.jquery.com/jquery-2.2.4.min.js"
             integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRUtelT44="
             croessorigin="anonymous"
@@ -177,10 +160,10 @@ if(isset($_GET['id']) && isset($_GET['item_id']) && isset($_GET['sub_total']) &&
               })
             }
             )
-            </script>
+            </script>-->
     
         </div>
-        <input type="hidden" name="id" value="<?php echo $id; ?>">
+        <input type="hidden" name="iduser" value="<?php echo $iduser; ?>">
         <input type="hidden" name="item_id" value="<?php echo $item_id; ?>">
         <input type="hidden" name="item_name" value="<?php echo $itemname; ?>">
         <input type="hidden" name="item_price" value="<?php echo $itemprice; ?>">
@@ -194,105 +177,68 @@ if(isset($_GET['id']) && isset($_GET['item_id']) && isset($_GET['sub_total']) &&
 
     </form>
 
-
     <?php 
     if($_SERVER['REQUEST_METHOD'] == "POST"){
       if (isset($_POST['orderinfosubmit'])){
           
-          $id = $_POST['id'];
-          $itemname = $_POST['item_name'];
-          $itemprice= $_POST['item_price'];
-          $qtyorder= $_POST['qtyorder'];
-          $totalpurchase = $_POST['totalpurchase'];
+          $iduser = $_POST['iduser'];
           $date = $_POST['date'];
           $fullnameship = $_POST['fullnameship'];
           $phonenum = $_POST['contact'];
+          $billemail = $_POST['billingemail'];
           $shippingaddress = $_POST['addressship'];
           $zipcode = $_POST['zipcode'];
-
           $cardname= $_POST['cardname'];
-          $cardnumber = $_POST['cardnumber'];
-          $item_id = $_POST['item_id'];
-          $subtotal = $_POST['subtotal'];
-          $billname =$_POST['billingname'];
-          $billemail = $_POST['billingemail'];
-          $billaddress = $_POST['billingaddress'];
-          $billingcity = $_POST['billingcity'];
-          $billingstate = $_POST['billingstate'];
           $cardnumber = $_POST['cardnumber'];
           $expmonth = $_POST['cardexp'];
           $cardyear = $_POST['cardyear'];
           $cardcvv = $_POST['cardcvv'];
 
 
-          if($billname!="" && $billaddress !="" ){ 
-          $sqlexe = "INSERT INTO tb_order SET
-          product = '$itemname',
-          price = '$itemprice',
-          qty ='$qtyorder',
-          total = '$totalpurchase',
+          $inserttoorder = "INSERT INTO tb_order (product,price,qty,total,user_id,item_id) SELECT product_name,price,qtyorder,totprice,user_id,item_id FROM cart";
+
+          $resuporder = mysqli_query($conn, $inserttoorder);
+
+          if($resuporder ==TRUe){
+          $sqlexe = "UPDATE tb_order SET
           orderdate = '$date',
           customer_name = '$fullnameship',
           customer_contact = '$phonenum',
           customer_email = '$billemail',
           customer_address = '$shippingaddress',
-          user_id = '$id',
-          item_id = '$item_id',
           zip_code = '$zipcode',
           cardname = '$cardname',
           card_number = '$cardnumber',
           expmonth = '$expmonth',
           expyear = '$cardyear',
           cvv = '$cardcvv'
+          WHERE user_id='$iduser'
           ";
-          
-          echo $itemname;
-          echo $itemprice;
-          echo $qtyorder;
-          echo $totalpurchase;
-          echo $date;
-          echo $fullnameship;
-          echo $phonenum;
-          echo $billemail;
-          echo $shippingaddress;
-          echo $id;
-          echo $item_id;
-          echo $zipcode;
-          echo $cardname;
-          echo $cardnumber;
-          echo $expmonth;
-          echo $cardyear;
-          echo $cardcvv;
+          $resuporder1 = mysqli_query($conn, $sqlexe);
 
 
-          $resexe = mysqli_query($conn, $sqlexe);
+          if($resuporder1 ==TRUE){
 
-          $sqlinfo = "INSERT INTO orderinfo SET
-          user_id = '$id',
-          item_id = '$item_id',
-          qtyorder = '$qtyorder',
-          price = '$itemprice',
-          product_name = '$itemname'
-          ";
+            $inserttoorderinfo = "INSERT INTO orderinfo (cart_id,user_id,item_id,qtyorder,price,product_name,item_image,totprice) SELECT cart_id,user_id,item_id,qtyorder,price,product_name,item_image,totprice  FROM cart";
 
-          $resexe1 =mysqli_query($conn, $sqlinfo);
+          $resuporder2 = mysqli_query($conn, $inserttoorderinfo);
 
+          }
+          }
           }else{
-             //Failed to add Category 
+             //Failed to UPDATE
              $_SESSION['Pay'] = "<div class='error text-center'>Failed to Make Payment Please Check Your Data .</div>";
              //Redirect to manage category page
              header('location:'.SITEURL.'checkout.php');
           }
 
-          if($resexe == true)
+          if($resuporder2 == true)
             {
-              
                 // Query Executed and Category Added
                 $_SESSION['Pay'] = "<div class='success text-center' >PayMent Successfully.</div>";
                 //Redirect to manage category page
                 $deletedrecord = $Cart->deleteCart($iduser);
-                header('location:'.SITEURL.'cart.php');
-                
+                header('location:'.SITEURL.'cart.php');    
             }else
             {
                 //Failed to add Category 
@@ -300,9 +246,7 @@ if(isset($_GET['id']) && isset($_GET['item_id']) && isset($_GET['sub_total']) &&
                 //Redirect to manage category page
                 header('location:'.SITEURL.'cart.php');
             }
-
       }
-    }
     ?>
 
 </div> 

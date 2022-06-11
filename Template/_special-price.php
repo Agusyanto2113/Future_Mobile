@@ -9,7 +9,7 @@
 if($_SERVER['REQUEST_METHOD'] == "POST"){
     if (isset($_POST['special_price_submit'])){
         // call method addToCart
-        $Cart->addToCart($_POST['user_id'], $_POST['item_id'], $_POST['qty_order'], $_POST['price']);
+        $Cart->insertIntoCartNew($_POST['user_id'], $_POST['item_id'], $_POST['qty_order'], $_POST['price'], $_POST['productname'], $_POST['image']);
     }
 }
 
@@ -51,6 +51,9 @@ $in_cart = $Cart->getCartId($product->getData('cart'));
                                 <input type="hidden" name="user_id" value="<?php echo 1; ?>">
                                 <input type="hidden" name="qty_order" value="<?php echo 1; ?>">
                                 <input type="hidden" name="price" value="<?php echo $item['item_price'] ?? '0'; ?>">
+                                <input type="hidden" name="productname" value="<?php echo $item['item_name'] ?? '0'; ?>">
+                                <input type="hidden" name="image" value="<?php echo $item['item_image'] ?? '0'; ?>">
+                            
                                 <?php
                                 if (in_array($item['item_id'], $in_cart ?? [])){
                                     echo '<button type="submit" disabled class="btn btn-success font-size-12">In the Cart</button>';

@@ -13,8 +13,8 @@ $sql = "SELECT a.user_id , a.item_id FROM orderinfo a LEFT JOIN tb_order b ON a.
         <div class="row">
             <div class="col-sm-9">
                 <?php
-                    foreach ($product->getData('orderinfo') as $item) :
-                        $cart = $product->getProduct($item['item_id']);
+                    foreach ($Cart->getDataOrder('orderinfo') as $item) :
+                        $cart = $Cart->getProductOrder($item['item_id']);
 
 
                         $subTotal[] = array_map(function ($item){
@@ -25,8 +25,8 @@ $sql = "SELECT a.user_id , a.item_id FROM orderinfo a LEFT JOIN tb_order b ON a.
                         <img src="assets/product/<?php echo $item['item_image']??"Unknow";?>" style="height: 120px;" alt="cart1" class="img-fluid">
                     </div>
                     <div class="col-sm-8">
-                        <h5 class="font-baloo font-size-20"><?php echo $item['item_name'] ?? "Unknown"; ?></h5>
-                        <small>by <?php echo $item['item_brand'] ?? "Brand"; ?></small>
+                        <h5 class="font-baloo font-size-20"><?php echo $item['product_name'] ?? "Unknown"; ?></h5>
+                        <!--<small>by <?php echo $item['item_brand'] ?? "Brand"; ?></small>-->
                         <!-- product rating -->
                         <div class="d-flex">
                             <div class="rating text-warning font-size-12">
@@ -44,8 +44,10 @@ $sql = "SELECT a.user_id , a.item_id FROM orderinfo a LEFT JOIN tb_order b ON a.
                         <div class="qty d-flex pt-2">
                             <div class="d-flex font-rale w-25">
 
-                                    <span name="quantity_order" data-id="<?php echo $item['item_id'] ?? '0'; ?>" type="text " data-id="pro1" class="num px-2 w-50 bg-light text-center" readonly placeholder="1">1</span>
-                                    <script>
+                                    
+                            <span name="quantity_order" data-id="<?php echo $item['item_id'] ?? '0'; ?>" type="text " data-id="pro1" class="num px-2 w-50 bg-light text-center" readonly placeholder="1"><?php echo $item['qtyorder']?></span>
+                            <span type="text" class="num px-2 w-350 bg-light text-center" readonly ><?php echo $item['status']??"Belum Di Proses Penjual"?></span>
+                                    <!--<script>
                                     const plus =document.querySelector(".plus"),
                                     minus =document.querySelector(".minus"),
                                     num =document.querySelector(".num");
@@ -65,7 +67,7 @@ $sql = "SELECT a.user_id , a.item_id FROM orderinfo a LEFT JOIN tb_order b ON a.
                                       num.innerText = a;
                                     }
                                     });
-                                    </script>
+                                    </script>-->
                               
                             </div>
 
@@ -76,13 +78,13 @@ $sql = "SELECT a.user_id , a.item_id FROM orderinfo a LEFT JOIN tb_order b ON a.
 
                     <div class="col-sm-2 text-right">
                         <div class="font-size-20 text-danger font-baloo">
-                            $<span class="product_price" data-id="<?php echo $item['item_id'] ?? '0'; ?>"><?php echo $item['item_price'] ?? 0; ?></span>
+                            $<span class="product_price" data-id="<?php echo $item['item_id'] ?? '0'; ?>"><?php echo $item['totprice'] ?? 0; ?></span>
                         </div>
                     </div>
                 </div>
                 <!-- !cart item -->
                 <?php
-                            return $item['item_price'];
+                            return $item['totprice'];
                         }, $cart); // closing array_map function
                     endforeach;
                 ?>
